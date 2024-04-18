@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Github</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img class="profile-avatar" src="https://github.com/bruno-corso.png" alt="avatar Bruno Corso">
+            <h1 class="profile-name">Bruno Tiago Corso</h1>
+            <h2 class="profile-username">@bruno-corso</h2>
+            <ul class="numbers">
+                <li class="numbers-item">
+                    <h4>Repositórios</h4>
+                    <span></span>
+                </li>
+                <li class="numbers-item">
+                    <h4>Seguidores</h4>
+                    <span></span>
+                </li>
+                <li class="numbers-item">
+                    <h4>Seguindo</h4>
+                    <span></span>
+                </li>
+            </ul>
+            <a href="https://www.linkedin.com/in/brunocorso/" class="profile-link">Ver no Github</a>
+        </div>
+    </header>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const endpoint = "https://api.github.com/users/bruno-corso"
+            const reposi = document.querySelectorAll('span')[0]
+            const seguidores = document.querySelectorAll('span')[1]
+            const seguindo = document.querySelectorAll('span')[2]
+            fetch(endpoint)
+            .then(async function(response){
+                const arrayDados = await response.json();
+                return arrayDados
+            })
+            .then((dados) => {
+                // console.log(dados);
+                reposi.innerHTML = dados.public_repos
+                seguidores.innerHTML = dados.followers
+                seguindo.innerHTML = dados.following
+            })
+        })
+    </script>
+</body>
+</html>
